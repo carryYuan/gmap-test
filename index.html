@@ -1,0 +1,41 @@
+<!doctype html>
+<!--[if lt IE 7]><html class='ie lte9 lte8 lte7 ie6' ><![endif]-->
+<!--[if IE 7 ]><html class="ie lte9 lte8 lte7 ie7" ><![endif]-->
+<!--[if IE 8 ]><html class="ie lte9 lte8 ie8" "><![endif]-->
+<!--[if IE 9 ]><html class="ie lte9 ie9" ><![endif]-->
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" >
+  <title>index</title>
+  <meta name="keywords" content=""/>
+  <meta name="description" content=""/>
+  <meta name="author" content="" />
+  <meta name="baidu-site-verification" content="uaEEahePcH" />
+  <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDY0kkJiTPVd2U7aTOAwhc9ySH6oHxOIYM&sensor=false">
+  </script>
+
+  <script>
+  function initialize()
+  {
+  var mapProp = {
+    center:new google.maps.LatLng(51.508742,-0.120850),
+    zoom:5,
+    mapTypeId:google.maps.MapTypeId.ROADMAP
+    };
+  var map=new google.maps.Map(document.getElementById("googleMap")
+    ,mapProp);
+  }
+
+  google.maps.event.addDomListener(window, 'load', initialize);
+  </script>
+  <link media="all" type="text/css" rel="stylesheet" href="css/mainstyle.css">
+
+</head>
+<body>
+ <div id="googleMap" style="width:500px; height:380px;"></div>
+
+  
+</body>
+</html>

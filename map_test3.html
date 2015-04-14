@@ -1,0 +1,40 @@
+<html>
+<head>
+<title>动态地图标记</title>
+<script src="http://maps.google.cn/maps/api/js?v=3.exp&sensor=false"></script>
+
+<script>
+var myCenter=new google.maps.LatLng(23.125244965641844,113.25897932052612);
+var marker;
+
+function initialize()
+{
+var mapProp = {
+  center:myCenter,
+  zoom:5,
+  mapTypeId:google.maps.MapTypeId.ROADMAP
+  };
+
+var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+marker=new google.maps.Marker({
+  position:myCenter,
+  icon:'images/loca-icon.png',
+  animation:google.maps.Animation.BOUNCE,
+  });
+
+marker.setMap(map);
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+<style type="text/css">
+  div#googleMap{margin: 10px auto; }
+</style>
+</head>
+
+<body>
+<div id="googleMap" style="width:500px;height:380px;"></div>
+</body>
+</html>
+			

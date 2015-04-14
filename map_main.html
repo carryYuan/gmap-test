@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>get map</title>
+    <style>
+      html, body, #map-canvas {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+    </style>
+    <script src="http://maps.google.cn/maps/api/js?v=3.exp&sensor=false"></script>
+    <script>
+// This example creates an interactive map which constructs a
+// polyline based on user clicks. Note that the polyline only appears
+// once its path property contains two LatLng coordinates.
+
+var poly;
+var map;
+var mypath="";
+
+function initialize() {
+  var mapOptions = {
+    zoom: 16,
+    center: new google.maps.LatLng(23.1256372,113.2657384)
+  };
+
+  map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+  var polyOptions = {
+    strokeColor: 'red',
+    strokeOpacity:0.6,
+    strokeWeight: 3,
+    editable:true
+  };
+  poly = new google.maps.Polyline(polyOptions);
+  poly.setMap(map);
+
+  // Add a listener for the click event
+  google.maps.event.addListener(map, 'click', addLatLng);
+}
+
+/**
+ * Handles click events on a map, and adds a new point to the Polyline.
+ * @param {google.maps.MouseEvent} event
+ */
+function addLatLng(event) {
+
+  var path = poly.getPath();
+
+  // Because path is an MVCArray, we can simply append a new coordinate
+  // and it will automatically appear.
+  path.push(event.latLng);
+
+  // Add a new marker at the new plotted point on the polyline.
+  //var marker = new google.maps.Marker({
+  //  position: event.latLng,
+  //  title: '#' + path.getLength(),
+  //  map: map
+  //});
+   console.log(path);
+   //poly.setMap(map);
+
+  var mypathlist=event.latLng.lat()+","+event.latLng.lng()+"/";
+  //console.log(mypathlist);
+  mypath+=mypathlist;
+  //map.panTo(event.latLng);//路线描点设为地图中心
+}
+
+function ck(){
+  document.getElementById("content").innerHTML=mypath;
+}
+
+function removeLine() {
+  initialize();//删除路线其实就是重载地图
+  mypath="";
+}
+
+ google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+  </head>
+  <body>
+    <div id="map-canvas" style="width:800px;height:400px; margin:0 auto;"></div>
+    <div onclick="ck()" style="width:100px;height:30px;background:#ccc;float:left;margin-right:20px;text-aline:center;line-height:30px;text-align: center;">读取坐标</div>
+    <div onclick="removeLine()" style="width:100px;height:30px;background:#ccc;float:left;text-aline:center;line-height:30px;text-align: center;">删除路线</div>
+    <div id="content" style="margin-top:20px;clear:both"></div>
+  </body>
+</html>

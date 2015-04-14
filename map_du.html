@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>read map</title>
+    <style>
+      html, body, #map-canvas {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+    </style>
+    <script src="http://maps.google.cn/maps/api/js?v=3.exp&sensor=false"></script>
+    <script>
+// This example creates an interactive map which constructs a
+// polyline based on user clicks. Note that the polyline only appears
+// once its path property contains two LatLng coordinates.https://maps.google.com/maps/api/js?v=3.exp&signed_in=false
+
+var poly;
+var map;
+var opath=[];
+var defaultzoom=16;
+
+var mypath="23.125284432669762,113.25964450836182/23.125284432669762,113.26224088668823/23.12392281349744,113.26232671737671/23.122975592010274,113.26241254806519/23.12279798723699,113.26239109039307/23.122561180506935,113.26434373855591/23.12301505970574,113.26608180999756/";
+
+
+
+function initialize() {
+  var mapOptions = {
+    zoom: defaultzoom,
+    center: new google.maps.LatLng(23.1256372,113.2657384)
+  };
+
+  map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+  
+  var opathlist=getpath(mypath);
+
+  for(i=0;i<opathlist.length;i++){
+      var ipath=opathlist[i];
+      opath.push(new google.maps.LatLng(ipath[0],ipath[1]));
+  }
+  //console.log(mapOptions.zoom);
+
+  poly = new google.maps.Polyline({
+    path:opath,
+    strokeColor: 'red',
+    strokeOpacity:0.6,
+    strokeWeight: 3,
+  });
+  poly.setMap(map);
+
+  for(k=0;k<opath.length;k++){
+      markerk=new google.maps.Marker({
+        position:opath[k],
+        //icon:'images/loca-icon.png',
+      });
+      markerk.setMap(map);
+  }
+
+  google.maps.event.addListener(map, 'zoom_changed', function() {
+    // 3 seconds after the center of the map has changed, pan back to the
+    // marker.
+    console.log(map.zoom);
+  });
+
+
+  // Add a listener for the click event
+}
+
+function getpath(rpath){
+  var gp1=[],gp2=[];
+  gp1.push(rpath.split("/"));
+  var gp20=gp1[0];
+  for(i=0;i<gp20.length-1;i++){
+    gp2.push(gp20[i].split(","));
+  }
+  return gp2;
+}
+
+/**
+ * Handles click events on a map, and adds a new point to the Polyline.
+ * @param {google.maps.MouseEvent} event
+ */
+
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+  </head>
+  <body>
+    <div id="map-canvas" style="width:800px;height:400px; margin:0 auto;"></div>
+  </body>
+</html>

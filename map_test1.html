@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>地图类型</title>
+<script src="http://maps.google.cn/maps/api/js?v=3.exp&sensor=false"></script>
+<script>
+function initialize()
+{
+  var mapProp = {
+    center: new google.maps.LatLng(23.125244965641844,113.25897932052612),
+    zoom:7,
+    mapTypeId: google.maps.MapTypeId.HYBRID
+  };
+  var mapProp2 = {
+    center: new google.maps.LatLng(23.125244965641844,113.25897932052612),
+    zoom:7,
+    mapTypeId: google.maps.MapTypeId.SATELLITE
+  };
+  var mapProp3 = {
+    center: new google.maps.LatLng(23.125244965641844,113.25897932052612),
+    zoom:12,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+  var mapProp4 = {
+    center: new google.maps.LatLng(23.125244965641844,113.25897932052612),
+    zoom:12,
+    mapTypeId: google.maps.MapTypeId.TERRAIN
+  };
+
+  var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+  var map2 = new google.maps.Map(document.getElementById("googleMap2"),mapProp2);
+  var map3 = new google.maps.Map(document.getElementById("googleMap3"),mapProp3);
+  var map4 = new google.maps.Map(document.getElementById("googleMap4"),mapProp4);
+}
+
+function loadScript()
+{
+  var script = document.createElement("script");
+  script.type = "text/javascript";
+  script.src = "http://maps.google.cn/maps/api/js?v=3.exp&sensor=false";
+  document.body.appendChild(script);
+}
+
+//window.onload = loadScript;
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+<style type="text/css">
+  div.mymap{margin: 10px auto; text-align: center}
+  div{text-align: center;}
+</style>
+</head>
+
+<body>
+<div id="googleMap" class="mymap" style="width:500px;height:500px;"></div>
+<div>google.maps.MapTypeId.HYBRID：显示卫星图像的主要街道透明层</div>
+<div id="googleMap2" class="mymap" style="width:500px;height:500px;"></div>
+<div>google.maps.MapTypeId.SATELLITE：显示卫星图像</div>
+<div id="googleMap3" class="mymap" style="width:500px;height:500px;"></div>
+<div>google.maps.MapTypeId.ROADMAP：显示普通的街道地图</div>
+<div id="googleMap4" class="mymap" style="width:500px;height:500px;"></div>
+<div>google.maps.MapTypeId.TERRAIN：显示带有自然特征（如地形和植被）的地图</div>
+
+</body>
+</html>			
